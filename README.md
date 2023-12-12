@@ -1,3 +1,11 @@
+Youtube video: https://youtu.be/-OpOy52M7Kc
+
+CHALLENGES FACED:
+1. We struggled with the while loops, as we often couldn't figure out why they ran indefinitely.
+2. Matplotlib couldn't be installed on one of our computers, and we had to do much research to see the issue.
+3. Re-prompting for a new glucose reading somewhat works; it asks again, but it does so 2 times and doesn't display the intended message, ignoring that the code works fine.
+4. Tomas had to learn how to use the jupyter extension.
+
 #CIS 1051 FINAL PROJECT: INSULIN DOSAGE CALCULATOR (Progress Report)
 #GROUP MEMBERS: Daniel Samsonov, Tomas Chaparro
 '''
