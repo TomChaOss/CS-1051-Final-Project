@@ -1,93 +1,22 @@
-Youtube video: https://youtu.be/-OpOy52M7Kc
+Insulin Calculator
 
-CHALLENGES FACED:
-1. We struggled with the while loops, as we often couldn't figure out why they ran indefinitely.
-2. Matplotlib couldn't be installed on one of our computers, and we had to do much research to see the issue.
-3. Re-prompting for a new glucose reading somewhat works; it asks again, but it does so 2 times and doesn't display the intended message, ignoring that the code works fine.
-4. Tomas had to learn how to use the jupyter extension.
+Description:\
+This program is a Python-based insulin calculator designed to assist individuals with type 1 diabetes in managing their blood sugar levels. It helps calculate the appropriate amount of insulin to administer based on various factors, including carbohydrate intake and current blood sugar level. The program is developed to offer a convenient and accurate way to make insulin dosage decisions.
 
-#CIS 1051 FINAL PROJECT: INSULIN DOSAGE CALCULATOR (Progress Report)
-#GROUP MEMBERS: Daniel Samsonov, Tomas Chaparro
-'''
-1. The program will prompt the user for their blood sugar, target blood sugar, 
-carb intake, insulin to carb ratio, and correction factor, which it will then save.
+Features:
+- Blood Sugar Management: Calculates insulin doses based on current blood sugar levels.
+- Carbohydrate Intake Calculation: Determines the required insulin dosage according to the amount of carbohydrates consumed.
+- Flexible Input Options: Allows users to input personalized insulin-to-carb ratios and blood sugar correction factors.
+- User-Friendly Design: Simple and intuitive prompts guide the user through the calculation process.
 
-2. If the current blood glucose is too low, the program will warn the user about it
-and will re-prompt for a new glucose reading.
+To run the program, you will need:
+- Python 3.x installed on your machine.
+- An IDE like Visual Studio Code, PyCharm, or Jupyter Notebook, or simply the command line for running Python code.
 
-3. Once the program gets the previous 2 values, it will calcucate and display the
-insulin dosage for the carbs, the blood glucose correction, and the total amount of insulin units.
+Usage:
+- Clone the repository to your local machine.
+- Run the Python file using this command: python "CIS 1051 FINAL PROJECT Insulin Calculator.py"
+- Follow the on-screen prompts to input your blood sugar levels, carbohydrate intake, and other relevant details.
 
-4. The registered carbs, blood glucose, and the total insulin units will be stored in a list 
-(or multiple lists), and the program will ask the user if they want to calculate another insulin shot.
-
-5. If the user decides to calculate another shot , the program will return the output of step 4, and this
-new output will be added/saved to the previously mentioned list(s).
-
-6. If the user doesn't want to calculate another insulin shot, the program will display a graph/histogram 
-consisting of the logged grams of carbs, glucose, and total insulin units.
-'''
-# %%
-
-import matplotlib.pyplot as plt
-
-def insulin_calculator():
-    while True:
-        blood_sugar = float(input("Enter blood sugar level in (mg/dL): "))
-        if blood_sugar < 70:
-            blood_sugar = float(input("Blood glucose too low, enter another reading or treat your hypoglycemia."))
-        else:
-            break
-    target_sugar = float(input("Enter target blood sugar level in (mg/dL): "))
-    carb_intake = float(input("Enter carbohydrates to be consumed in (grams): "))
-    carb_ratio_option = input("Do you know your carb ratio (y/n)?")
-    if carb_ratio_option.lower() == 'y':
-        carb_ratio = float(input("Enter insulin-to-carb ratio in (grams per unit of insulin): "))
-    else:
-        insulin_dose = float(input("Enter insulin dose for the carb intake: "))
-        carb_ratio = insulin_dose / carb_intake
-    correction_factor = float(input("Enter correction factor in (mg/dL per unit of insulin): "))
-
-    #Insulin dosage formula
-    carb_dose = round(carb_intake / carb_ratio, 2)
-    correction_dose = round((blood_sugar - target_sugar) / correction_factor, 2)
-
-    total_dosage = round(carb_dose + correction_dose, 2)
-
-    #Check blood sugar level
-    if blood_sugar > 180:
-        print("Blood sugar level is too high")
-    elif blood_sugar < 70:
-        print("Blood sugar level is too low")
-    else:
-        print("Blood sugar level is OK")
-
-
-    print("\nInsulin Dosage Calculation:")
-    print(f"Carbohydrate Dose: {carb_dose} units")
-    print(f"Correction Dose: {correction_dose} units")
-    print(f"Total Insulin Dosage: {total_dosage} units")
-
-    return blood_sugar, total_dosage
-
-if __name__ == "__main__":
-    blood_sugar_values = []
-    total_dosage_values = []
-
-    while True:
-        blood_sugar, total_dosage = insulin_calculator()
-        blood_sugar_values.append(blood_sugar)
-        total_dosage_values.append(total_dosage)
-
-        another_sample = input("Do you want to input another sample? (yes/no): ")
-        if another_sample.lower() != "yes":
-            break
-
-    #Visualization of data
-    plt.figure(figsize=(10, 6))
-    plt.bar(range(len(blood_sugar_values)), total_dosage_values, color='blue')
-    plt.xlabel('Sample')
-    plt.ylabel('Total Dosage (units)')
-    plt.title('Total Insulin Dosage for Blood Sugar Levels')
-    plt.xticks(range(len(blood_sugar_values)), [f'Sample {i+1}' for i in range(len(blood_sugar_values))])
-    plt.show()
+License:\
+This project is open-source and available under the MIT License.
